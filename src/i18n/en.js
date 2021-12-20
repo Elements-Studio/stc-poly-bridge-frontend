@@ -6,7 +6,7 @@ export default {
   ...element,
   common: {
     header: {
-      brandName: 'PolyBridge',
+      brandName: 'STCBridge',
     },
     wallets: {
       connectWallet: 'Connect Wallet',
@@ -26,13 +26,12 @@ export default {
       connectWallet: 'Connect {walletName}',
     },
     footer: {
-      copyright: '© 2021 Polynetwork. All rights reserved.',
+      copyright: '© 2021 Starcoin.org',
     },
   },
   home: {
     index: {
-      slogon:
-        'To\nbuild the next generation\nInternet infrastructure,\nrealize interoperability\nbetween\nmultiple <em>chains</em>',
+      slogon: 'A <em>LAYERED</em>\nSMART CONTRACT\nAND DISTRIBUTED\nFINANCIAL NETWORK',
     },
     form: {
       title: 'Bridge',
