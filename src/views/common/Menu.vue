@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <CLink @click="goAudit" class="item" target="_self">
+    <!-- <CLink @click="goAudit" class="item" target="_self">
       {{ $t('common.menu.audit') }}
     </CLink>
     <CLink
@@ -16,7 +16,7 @@
       target="_self"
     >
       {{ $t('common.menu.nft') }}
-    </CLink>
+    </CLink> -->
   </div>
 </template>
 
