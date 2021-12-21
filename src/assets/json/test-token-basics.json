@@ -1,5 +1,5 @@
 {
-  "TotalCount": 15,
+  "TotalCount": 16,
   "TokenBasics": [
     {
       "Name": "BAC",
@@ -369,6 +369,40 @@
           "Name": "ONTd",
           "Property": 1,
           "TokenBasicName": "ONTd",
+          "TokenBasic": null,
+          "TokenMaps": null
+        }
+      ]
+    },
+    {
+      "Name": "STC",
+      "Precision": 9,
+      "Price": "0.09",
+      "Ind": 1,
+      "Time": 1616371229,
+      "Property": 1,
+      "Meta": "",
+      "PriceMarkets": null,
+      "Tokens": [
+        {
+          "Hash": "00000000000000000000000000000001",
+          "ChainId": 1,
+          "Name": "STC",
+          "Property": 1,
+          "TokenBasicName": "STC",
+          "Precision": 9,
+          "AvailableAmount": 71745132220000000000,
+          "TokenBasic": null,
+          "TokenMaps": null
+        },
+        {
+          "Hash": "00000000000000000000000000000001",
+          "ChainId": 251,
+          "Name": "STC",
+          "Property": 1,
+          "TokenBasicName": "STC",
+          "Precision": 9,
+          "AvailableAmount": 71745132220000000000,
           "TokenBasic": null,
           "TokenMaps": null
         }
