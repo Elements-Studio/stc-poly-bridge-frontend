@@ -16,6 +16,7 @@ const APIS = {
   [ChainId.Optimistic]: () => import('./eth'),
   [ChainId.Fantom]: () => import('./eth'),
   [ChainId.Avalanche]: () => import('./eth'),
+  [ChainId.Starcoin]: () => import('./stc'),
 };
 
 export async function getChainApi(chainId) {
