@@ -43,21 +43,99 @@ request.interceptors.response.use(
 
 export default {
   async getTokenBasics() {
+    // https://bridge.poly.network/testnet/v1/tokenbasics
     const result = await request({ method: 'post', url: '/tokenbasics', data: {} });
+    console.log({ result });
+    result.TokenBasics.push({
+      Name: 'STC',
+      Precision: 9,
+      Price: '0.09',
+      Ind: 1,
+      Time: 1616371229,
+      Property: 1,
+      Meta: '',
+      PriceMarkets: null,
+      Tokens: [
+        {
+          Hash: '00000000000000000000000000000001',
+          ChainId: 1,
+          Name: 'STC',
+          Property: 1,
+          TokenBasicName: 'STC',
+          Precision: 9,
+          AvailableAmount: 71745132220000000000,
+          TokenBasic: null,
+          TokenMaps: null,
+        },
+        {
+          Hash: '00000000000000000000000000000001',
+          ChainId: 251,
+          Name: 'STC',
+          Property: 1,
+          TokenBasicName: 'STC',
+          Precision: 9,
+          AvailableAmount: 71745132220000000000,
+          TokenBasic: null,
+          TokenMaps: null,
+        },
+      ],
+    });
     const tokenBasics = deserialize(list(schemas.tokenBasic), result.TokenBasics || []);
+    console.log({ tokenBasics });
+
     const tokens = _.flatMap(tokenBasics, tokenBasic => tokenBasic.tokens || []);
+    console.log({ tokens });
     return { tokenBasics, tokens };
   },
   async getTokenMaps({ fromChainId, fromTokenHash }) {
-    const result = await request({
-      method: 'post',
-      url: '/tokenmap',
-      data: {
-        ChainId: fromChainId,
-        Hash: fromTokenHash,
-      },
-    });
+    console.log({ fromChainId, fromTokenHash });
+    // https://bridge.poly.network/testnet/v1/tokenmap
+    let result;
+    if (fromChainId === 251 && fromTokenHash === '00000000000000000000000000000001') {
+      result = {
+        TotalCount: 1,
+        TokenMaps: [
+          {
+            SrcTokenHash: '00000000000000000000000000000001',
+            SrcToken: {
+              Hash: '00000000000000000000000000000001',
+              ChainId: 251,
+              Name: 'STC',
+              Property: 1,
+              TokenBasicName: 'STC',
+              Precision: 9,
+              AvailableAmount: '9999999999999999999999999999999999999999875349141',
+              TokenBasic: null,
+              TokenMaps: null,
+            },
+            DstTokenHash: 'ad3f96ae966ad60347f31845b7e4b333104c52fb',
+            DstToken: {
+              Hash: 'ad3f96ae966ad60347f31845b7e4b333104c52fb',
+              ChainId: 2,
+              Name: 'STC',
+              Property: 1,
+              TokenBasicName: 'STC',
+              Precision: 9,
+              AvailableAmount: '11985645907739',
+              TokenBasic: null,
+              TokenMaps: null,
+            },
+            Property: 1,
+          },
+        ],
+      };
+    } else {
+      result = await request({
+        method: 'post',
+        url: '/tokenmap',
+        data: {
+          ChainId: fromChainId,
+          Hash: fromTokenHash,
+        },
+      });
+    }
     const tokenMaps = deserialize(list(schemas.tokenMap), result.TokenMaps);
+    console.log({ tokenMaps });
     return tokenMaps;
   },
   async getFee({ fromChainId, fromTokenHash, toTokenHash, toChainId }) {
