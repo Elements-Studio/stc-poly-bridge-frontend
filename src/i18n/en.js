@@ -156,6 +156,7 @@ export default {
       [ChainId.Optimistic]: 'Optimistic',
       [ChainId.Fantom]: 'Fantom',
       [ChainId.Avalanche]: 'Avalanche',
+      [ChainId.Stc]: 'Starcoin',
     },
     chainNetworkName: {
       [ChainId.Poly]: TARGET_MAINNET ? 'MainNet' : 'TestNet',
@@ -172,6 +173,7 @@ export default {
       [ChainId.Ont]: TARGET_MAINNET ? 'MainNet' : 'TestNet',
       [ChainId.Fantom]: TARGET_MAINNET ? 'MainNet' : 'TestNet',
       [ChainId.Avalanche]: TARGET_MAINNET ? 'MainNet' : 'TestNet',
+      [ChainId.Stc]: TARGET_MAINNET ? 'MainNet' : 'Barnard TestNet',
     },
     transactionStatus: {
       [TransactionStatus.Finished]: 'Finished',

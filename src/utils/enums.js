@@ -27,6 +27,7 @@ export const ChainId = {
   Optimistic: TARGET_MAINNET ? 23 : 210,
   Fantom: TARGET_MAINNET ? 22 : 208,
   Avalanche: TARGET_MAINNET ? 21 : 209,
+  Stc: TARGET_MAINNET ? 1 : 251,
 };
 
 export const SingleTransactionStatus = {

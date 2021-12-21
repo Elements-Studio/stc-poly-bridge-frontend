@@ -74,6 +74,13 @@ export const WALLETS = [
     downloadUrl:
       'https://chrome.google.com/webstore/detail/cyano-wallet/dkdedlpgdmmkkfjabffeganieamfklkm',
   },
+  {
+    name: WalletName.Starmask,
+    supportedChainIds: [ChainId.Stc],
+    icon: require('@/assets/svg/stc.svg'),
+    downloadUrl:
+      'https://chrome.google.com/webstore/detail/starmask/mfhbebgoclkghebffdldpobeajmbecfk',
+  },
   // ...(TARGET_MAINNET
   //   ? [
   {
@@ -311,6 +318,19 @@ export const CHAINS = [
       ? 'c93837e82178d406af8c84e1841c6960af251cb5'
       : 'a5c101afa9e04e9dd2c912983795005a49e02efa',
   },
+  {
+    id: ChainId.Stc,
+    nativeFee: false,
+    icon: require('@/assets/svg/stc.svg'),
+    explorerUrl: TARGET_MAINNET
+      ? 'https://stcscan.io/main/transactions/detail/0x{txHash}'
+      : 'https://stcscan.io/barnard/transactions/detail/0x{txHash}',
+    lockContractHash: TARGET_MAINNET
+      ? 'f8328398c4c8e77b6c5843f5e404be0170d5012e'
+      : 'd63810ca692b43e0ed35bfa40e653d05b2cb3585',
+    nftFeeContractHash: 'd2a4cff31913016155e38e474a2c06d08be276cf',
+    nftFeeName: 'STC',
+  },
 ];
 
 export const UNKNOWN_ICON = require('@/assets/svg/unknown.svg');
@@ -374,10 +394,11 @@ export const TOKEN_BASIC_ICONS = {
   XTM: require('@/assets/svg/xtm.svg'),
   XTF: require('@/assets/svg/xtf.svg'),
   TAP: require('@/assets/svg/tap.svg'),
+  STC: require('@/assets/svg/stc.svg'),
   '8PAY': require('@/assets/jpg/8pay.jpg'),
 };
 
 export const DEFAULT_TOKEN_BASIC_NAME = 'USDT';
 export const DEFAULT_CHAIN_NAME = 'ETH';
 
-export const TOP_TOKEN_BASIC_NAMES = ['NEO', 'nNEO', 'ETH', 'USDT', 'USDC', 'DAI'];
+export const TOP_TOKEN_BASIC_NAMES = ['STC', 'NEO', 'nNEO', 'ETH', 'USDT', 'USDC', 'DAI'];
