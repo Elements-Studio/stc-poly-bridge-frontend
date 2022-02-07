@@ -139,6 +139,7 @@ export default {
       [WalletName.Binance]: 'Binance',
       [WalletName.Cyano]: 'Cyano',
       [WalletName.WalletConnect]: 'WalletConnect',
+      [WalletName.StarMask]: 'StarMask',
     },
     chainName: {
       [ChainId.Poly]: 'Poly',

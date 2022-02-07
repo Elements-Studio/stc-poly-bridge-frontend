@@ -75,7 +75,7 @@ export const WALLETS = [
       'https://chrome.google.com/webstore/detail/cyano-wallet/dkdedlpgdmmkkfjabffeganieamfklkm',
   },
   {
-    name: WalletName.Starmask,
+    name: WalletName.StarMask,
     supportedChainIds: [ChainId.Stc],
     icon: require('@/assets/svg/stc.svg'),
     downloadUrl:

@@ -9,6 +9,7 @@ export const WalletName = {
   Binance: 'Binance',
   Cyano: 'Cyano',
   WalletConnect: 'WalletConnnect',
+  StarMask: 'StarMask',
 };
 
 export const ChainId = {
