@@ -1,13 +1,14 @@
 import Web3 from 'web3';
 import store from '@/store';
 import { getChainApi } from '@/utils/chainApi';
+import { toChecksumAddress } from '@starcoin/stc-util';
 import { integerToDecimal, decimalToInteger, toStandardHex } from '@/utils/convertors';
 import { WalletName, ChainId, SingleTransactionStatus } from '@/utils/enums';
 import { WalletError } from '@/utils/errors';
 import { TARGET_MAINNET } from '@/utils/env';
 import { tryToConvertAddressToHex } from '.';
 
-const META_MASK_CONNECTED_KEY = 'META_MASK_CONNECTED';
+const STAR_MASK_CONNECTED_KEY = 'STAR_MASK_CONNECTED';
 const NFT_FEE_TOKEN_HASH = '0x0000000000000000000000000000000000000000';
 const PLT_NFT_FEE_TOKEN_HASH = '0x0000000000000000000000000000000000000103';
 
@@ -47,13 +48,14 @@ function convertWalletError(error) {
 }
 
 async function queryState() {
-  const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+  const accounts = await window.starcoin.request({ method: 'stc_accounts' });
   const address = accounts[0] || null;
-  const addressHex = await tryToConvertAddressToHex(WalletName.MetaMask, address);
-  const checksumAddress = address && web3.utils.toChecksumAddress(address);
-  const network = await window.ethereum.request({ method: 'eth_chainId' });
+  const addressHex = await tryToConvertAddressToHex(WalletName.StarMask, address);
+  const checksumAddress = address && toChecksumAddress(address);
+  const networkInfo = await window.starcoin.request({ method: 'chain.id' });
+  const network = networkInfo?.id;
   store.dispatch('updateWallet', {
-    name: WalletName.MetaMask,
+    name: WalletName.StarMask,
     address: checksumAddress,
     addressHex,
     connected: !!checksumAddress,
@@ -63,44 +65,44 @@ async function queryState() {
 
 async function init() {
   try {
-    if (!window.ethereum) {
+    if (!window.starcoin) {
       return;
     }
-    web3 = new Web3(window.ethereum);
-    store.dispatch('updateWallet', { name: WalletName.MetaMask, installed: true });
+    web3 = new Web3(window.starcoin);
+    store.dispatch('updateWallet', { name: WalletName.StarMask, installed: true });
 
-    if (sessionStorage.getItem(META_MASK_CONNECTED_KEY) === 'true') {
+    if (sessionStorage.getItem(STAR_MASK_CONNECTED_KEY) === 'true') {
       await queryState();
     }
 
-    window.ethereum.on('accountsChanged', async accounts => {
+    window.starcoin.on('accountsChanged', async accounts => {
       const address = accounts[0] || null;
-      const addressHex = await tryToConvertAddressToHex(WalletName.MetaMask, address);
+      const addressHex = await tryToConvertAddressToHex(WalletName.StarMask, address);
       const checksumAddress = address && web3.utils.toChecksumAddress(address);
       store.dispatch('updateWallet', {
-        name: WalletName.MetaMask,
+        name: WalletName.StarMask,
         address: checksumAddress,
         addressHex,
         connected: !!checksumAddress,
       });
     });
 
-    window.ethereum.on('chainChanged', network => {
+    window.starcoin.on('chainChanged', network => {
       store.dispatch('updateWallet', {
-        name: WalletName.MetaMask,
+        name: WalletName.StarMask,
         chainId: NETWORK_CHAIN_ID_MAPS[Number(network)],
       });
     });
   } finally {
-    store.getters.getWallet(WalletName.MetaMask).deferred.resolve();
+    store.getters.getWallet(WalletName.StarMask).deferred.resolve();
   }
 }
 
 async function connect() {
   try {
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    await window.starcoin.request({ method: 'stc_requestAccounts' });
     await queryState();
-    sessionStorage.setItem(META_MASK_CONNECTED_KEY, 'true');
+    sessionStorage.setItem(STAR_MASK_CONNECTED_KEY, 'true');
   } catch (error) {
     throw convertWalletError(error);
   }
