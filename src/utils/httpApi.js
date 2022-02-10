@@ -80,6 +80,61 @@ export default {
         },
       ],
     });
+    result.TokenBasics.map(token => {
+      if (token.Name === 'ETH') {
+        console.log('token1', token);
+        token.Tokens.push({
+          // "Hash": "0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH",
+          Hash: '0x18351d311d32201149a4df2a9fc2db8a',
+          ChainId: 318,
+          Name: 'xETH',
+          Property: 1,
+          TokenBasicName: 'ETH',
+          Precision: 18,
+          // curl --location --request POST 'https://barnard-seed.starcoin.org' \
+          // --header 'Content-Type: application/json' \
+          // --data-raw '{
+          //  "id":101,
+          //  "jsonrpc":"2.0",
+          //  "method":"contract.get_resource",
+          //  "params":["0x18351d311d32201149a4df2a9fc2db8a", "0x1::Account::Balance<0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH>"]
+          // }'
+          // Response:
+          // {
+          //   "jsonrpc": "2.0",
+          //   "result": {
+          //       "abilities": 8,
+          //       "type_": "0x00000000000000000000000000000001::Account::Balance<0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH>",
+          //       "value": [
+          //           [
+          //               "token",
+          //               {
+          //                   "Struct": {
+          //                       "abilities": 4,
+          //                       "type_": "0x00000000000000000000000000000001::Token::Token<0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH>",
+          //                       "value": [
+          //                           [
+          //                               "value",
+          //                               {
+          //                                   "U128": "1000555555555000000"
+          //                               }
+          //                           ]
+          //                       ]
+          //                   }
+          //               }
+          //           ]
+          //       ]
+          //   },
+          //   "id": 101
+          // }
+          AvailableAmount: '1000555555555000000',
+          TokenBasic: null,
+          TokenMaps: null,
+        });
+        console.log('token2', token);
+      }
+      return token;
+    });
     const tokenBasics = deserialize(list(schemas.tokenBasic), result.TokenBasics || []);
     console.log({ tokenBasics });
 
@@ -133,7 +188,28 @@ export default {
           Hash: fromTokenHash,
         },
       });
+      if (fromTokenHash === '0000000000000000000000000000000000000000') {
+        result.TotalCount += 1;
+        result.TokenMaps.push({
+          SrcTokenHash: result.TokenMaps[0].SrcTokenHash,
+          SrcToken: result.TokenMaps[0].SrcToken,
+          DstTokenHash: '0x18351d311d32201149a4df2a9fc2db8a',
+          DstToken: {
+            Hash: '0x18351d311d32201149a4df2a9fc2db8a',
+            ChainId: 318,
+            Name: 'xETH',
+            Property: 1,
+            TokenBasicName: 'ETH',
+            Precision: 18,
+            AvailableAmount: '1000555555555000000',
+            TokenBasic: null,
+            TokenMaps: null,
+          },
+          Property: 1,
+        });
+      }
     }
+    console.log({ result });
     const tokenMaps = deserialize(list(schemas.tokenMap), result.TokenMaps);
     console.log({ tokenMaps });
     return tokenMaps;
