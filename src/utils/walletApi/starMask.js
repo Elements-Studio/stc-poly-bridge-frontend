@@ -78,7 +78,7 @@ async function init() {
     window.starcoin.on('accountsChanged', async accounts => {
       const address = accounts[0] || null;
       const addressHex = await tryToConvertAddressToHex(WalletName.StarMask, address);
-      const checksumAddress = address && web3.utils.toChecksumAddress(address);
+      const checksumAddress = address && toChecksumAddress(address);
       store.dispatch('updateWallet', {
         name: WalletName.StarMask,
         address: checksumAddress,
