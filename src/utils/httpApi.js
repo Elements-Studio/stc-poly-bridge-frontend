@@ -69,7 +69,7 @@ export default {
         },
         {
           Hash: '00000000000000000000000000000001',
-          ChainId: 251,
+          ChainId: 318,
           Name: 'STC',
           Property: 1,
           TokenBasicName: 'STC',
@@ -91,7 +91,7 @@ export default {
     console.log({ fromChainId, fromTokenHash });
     // https://bridge.poly.network/testnet/v1/tokenmap
     let result;
-    if (fromChainId === 251 && fromTokenHash === '00000000000000000000000000000001') {
+    if (fromChainId === 318 && fromTokenHash === '00000000000000000000000000000001') {
       result = {
         TotalCount: 1,
         TokenMaps: [
@@ -99,7 +99,7 @@ export default {
             SrcTokenHash: '00000000000000000000000000000001',
             SrcToken: {
               Hash: '00000000000000000000000000000001',
-              ChainId: 251,
+              ChainId: 318,
               Name: 'STC',
               Property: 1,
               TokenBasicName: 'STC',
