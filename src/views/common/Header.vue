@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <CLink class="brand" :to="{ name: 'home' }">
-      <img class="brand-logo" src="@/assets/svg/stc.svg" width="30" />
+      <img class="brand-logo" src="@/assets/svg/logo.svg" />
       <span class="brand-name">{{ $t('common.header.brandName') }}</span>
     </CLink>
     <CFlexSpan />
