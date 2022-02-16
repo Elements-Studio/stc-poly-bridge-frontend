@@ -14,6 +14,7 @@ const PLT_NFT_FEE_TOKEN_HASH = '0x0000000000000000000000000000000000000103';
 
 const NETWORK_CHAIN_ID_MAPS = {
   [TARGET_MAINNET ? 1 : 318]: ChainId.Stc,
+  251: 318,
 };
 
 let web3;
@@ -111,12 +112,12 @@ async function connect() {
 async function getBalance({ chainId, address, tokenHash }) {
   try {
     const tokenBasic = store.getters.getTokenBasicByChainIdAndTokenHash({ chainId, tokenHash });
-    if (tokenHash === '0000000000000000000000000000000000000000') {
-      const result = await web3.eth.getBalance(address);
-      return integerToDecimal(result, tokenBasic.decimals);
-    }
-    const tokenContract = new web3.eth.Contract(require('@/assets/json/eth-erc20.json'), tokenHash);
-    const result = await tokenContract.methods.balanceOf(address).call();
+    const response = await window.starcoin.request({
+      method: 'contract.get_resource',
+      params: [address, `0x1::Account::Balance<${tokenHash}>`],
+    });
+    const result = response?.value[0][1].Struct.value[0][1].U128;
+
     return integerToDecimal(result, tokenBasic.decimals);
   } catch (error) {
     throw convertWalletError(error);
@@ -141,11 +142,16 @@ async function getO3Balance({ chainId, address, tokenHash }) {
 async function getAllowance({ chainId, address, tokenHash, spender }) {
   try {
     const tokenBasic = store.getters.getTokenBasicByChainIdAndTokenHash({ chainId, tokenHash });
-    if (tokenHash === '0000000000000000000000000000000000000000') {
-      return null;
-    }
-    const tokenContract = new web3.eth.Contract(require('@/assets/json/eth-erc20.json'), tokenHash);
-    const result = await tokenContract.methods.allowance(address, `0x${spender}`).call();
+    const result = await window.starcoin.request({
+      method: 'contract.call_v2',
+      params: [
+        {
+          function_id: '0x1::Token::market_cap',
+          type_args: [tokenHash],
+          args: [],
+        },
+      ],
+    });
     return integerToDecimal(result, tokenBasic.decimals);
   } catch (error) {
     throw convertWalletError(error);

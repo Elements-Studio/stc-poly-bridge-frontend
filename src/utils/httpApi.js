@@ -106,42 +106,77 @@ export default {
     return { tokenBasics, tokens };
   },
   async getTokenMaps({ fromChainId, fromTokenHash }) {
-    console.log({ fromChainId, fromTokenHash });
+    console.log('getTokenMaps', { fromChainId, fromTokenHash });
     // https://bridge.poly.network/testnet/v1/tokenmap
     let result;
-    if (fromChainId === 318 && fromTokenHash === '00000000000000000000000000000001::stc::stc') {
-      result = {
-        TotalCount: 1,
-        TokenMaps: [
-          {
-            SrcTokenHash: '00000000000000000000000000000001',
-            SrcToken: {
-              Hash: '00000000000000000000000000000001',
-              ChainId: 318,
-              Name: 'STC',
+    if (fromChainId === 318) {
+      if (fromTokenHash === '0x00000000000000000000000000000001::STC::STC') {
+        result = {
+          TotalCount: 1,
+          TokenMaps: [
+            {
+              SrcTokenHash: '00000000000000000000000000000001',
+              SrcToken: {
+                Hash: '00000000000000000000000000000001',
+                ChainId: 318,
+                Name: 'STC',
+                Property: 1,
+                TokenBasicName: 'STC',
+                Precision: 9,
+                AvailableAmount: '9999999999999999999999999999999999999999875349141',
+                TokenBasic: null,
+                TokenMaps: null,
+              },
+              DstTokenHash: 'ad3f96ae966ad60347f31845b7e4b333104c52fb',
+              DstToken: {
+                Hash: 'ad3f96ae966ad60347f31845b7e4b333104c52fb',
+                ChainId: 2,
+                Name: 'STC',
+                Property: 1,
+                TokenBasicName: 'STC',
+                Precision: 9,
+                AvailableAmount: '11985645907739',
+                TokenBasic: null,
+                TokenMaps: null,
+              },
               Property: 1,
-              TokenBasicName: 'STC',
-              Precision: 9,
-              AvailableAmount: '9999999999999999999999999999999999999999875349141',
-              TokenBasic: null,
-              TokenMaps: null,
             },
-            DstTokenHash: 'ad3f96ae966ad60347f31845b7e4b333104c52fb',
-            DstToken: {
-              Hash: 'ad3f96ae966ad60347f31845b7e4b333104c52fb',
-              ChainId: 2,
-              Name: 'STC',
+          ],
+        };
+      } else if (fromTokenHash === '0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH') {
+        result = {
+          TotalCount: 1,
+          TokenMaps: [
+            {
+              SrcTokenHash: '0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH',
+              SrcToken: {
+                Hash: '0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH',
+                ChainId: 318,
+                Name: 'xETH',
+                Property: 1,
+                TokenBasicName: 'ETH',
+                Precision: 18,
+                AvailableAmount: '1000555555555000000',
+                TokenBasic: null,
+                TokenMaps: null,
+              },
+              DstTokenHash: '0000000000000000000000000000000000000000',
+              DstToken: {
+                Hash: '0000000000000000000000000000000000000000',
+                ChainId: 2,
+                Name: 'ETH',
+                Property: 1,
+                TokenBasicName: 'ETH',
+                Precision: 18,
+                AvailableAmount: '167419898320559332669',
+                TokenBasic: null,
+                TokenMaps: null,
+              },
               Property: 1,
-              TokenBasicName: 'STC',
-              Precision: 9,
-              AvailableAmount: '11985645907739',
-              TokenBasic: null,
-              TokenMaps: null,
             },
-            Property: 1,
-          },
-        ],
-      };
+          ],
+        };
+      }
     } else {
       result = await request({
         method: 'post',
@@ -156,9 +191,9 @@ export default {
         result.TokenMaps.push({
           SrcTokenHash: result.TokenMaps[0].SrcTokenHash,
           SrcToken: result.TokenMaps[0].SrcToken,
-          DstTokenHash: '0x18351d311d32201149a4df2a9fc2db8a',
+          DstTokenHash: '0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH',
           DstToken: {
-            Hash: '0x18351d311d32201149a4df2a9fc2db8a',
+            Hash: '0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH',
             ChainId: 318,
             Name: 'xETH',
             Property: 1,

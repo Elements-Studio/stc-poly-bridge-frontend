@@ -328,7 +328,7 @@ export const CHAINS = [
     lockContractHash: TARGET_MAINNET
       ? 'f8328398c4c8e77b6c5843f5e404be0170d5012e'
       : 'd63810ca692b43e0ed35bfa40e653d05b2cb3585',
-    nftFeeContractHash: 'd2a4cff31913016155e38e474a2c06d08be276cf',
+    nftFeeContractHash: '0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH',
     nftFeeName: 'STC',
   },
 ];

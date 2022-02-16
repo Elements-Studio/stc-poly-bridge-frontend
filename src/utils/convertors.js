@@ -11,7 +11,10 @@ export function toStandardHex(hex) {
   if (!isValidHex(hex)) {
     throw new Error('input param is not a valid hex string');
   }
-  return hex.replace(/0[xX]/, '').toLowerCase();
+  // Starcoin hex should not be changed
+  return /^(0[xX])?([0-9A-Fa-f]{2})*((::[_0-9A-Za-z]+){2})$/.test(hex)
+    ? hex
+    : hex.replace(/0[xX]/, '').toLowerCase();
 }
 
 export function bytesToHex(bytes) {
