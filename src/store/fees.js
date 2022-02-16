@@ -33,11 +33,11 @@ export default {
         fee = {
           SrcChainId: 2,
           Hash: '0000000000000000000000000000000000000000',
-          DstChainId: 3,
+          DstChainId: 318,
           UsdtAmount: '0.2146000008',
           TokenAmount: '0.00007058',
           TokenAmountWithPrecision: '7.05835147695839651e+13',
-          SwapTokenHash: '0000000000000000000000000000000000000000',
+          SwapTokenHash: '0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH',
           Balance: '2.9553450781056623352e+29',
           BalanceWithPrecision: '2.9553450781056623352e+47',
         };

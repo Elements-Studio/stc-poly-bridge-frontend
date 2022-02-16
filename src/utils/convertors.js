@@ -4,7 +4,7 @@ import Bn from 'bn.js';
 import numberToBN from 'number-to-bn';
 
 export function isValidHex(hex) {
-  return typeof hex === 'string' && /^(0[xX])?([0-9A-Fa-f]{2})*$/.test(hex);
+  return typeof hex === 'string' && /^(0[xX])?([0-9A-Fa-f]{2})*((::[_0-9A-Za-z]+){2})?$/.test(hex);
 }
 
 export function toStandardHex(hex) {

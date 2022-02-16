@@ -57,7 +57,7 @@ export default {
       PriceMarkets: null,
       Tokens: [
         {
-          Hash: '00000000000000000000000000000001',
+          Hash: '00000000000000000000000000000001::STC::STC',
           ChainId: 1,
           Name: 'STC',
           Property: 1,
@@ -68,7 +68,7 @@ export default {
           TokenMaps: null,
         },
         {
-          Hash: '00000000000000000000000000000001',
+          Hash: '00000000000000000000000000000001::STC::STC',
           ChainId: 318,
           Name: 'STC',
           Property: 1,
@@ -84,49 +84,12 @@ export default {
       if (token.Name === 'ETH') {
         console.log('token1', token);
         token.Tokens.push({
-          // "Hash": "0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH",
-          Hash: '0x18351d311d32201149a4df2a9fc2db8a',
+          Hash: '0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH',
           ChainId: 318,
           Name: 'xETH',
           Property: 1,
           TokenBasicName: 'ETH',
           Precision: 18,
-          // curl --location --request POST 'https://barnard-seed.starcoin.org' \
-          // --header 'Content-Type: application/json' \
-          // --data-raw '{
-          //  "id":101,
-          //  "jsonrpc":"2.0",
-          //  "method":"contract.get_resource",
-          //  "params":["0x18351d311d32201149a4df2a9fc2db8a", "0x1::Account::Balance<0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH>"]
-          // }'
-          // Response:
-          // {
-          //   "jsonrpc": "2.0",
-          //   "result": {
-          //       "abilities": 8,
-          //       "type_": "0x00000000000000000000000000000001::Account::Balance<0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH>",
-          //       "value": [
-          //           [
-          //               "token",
-          //               {
-          //                   "Struct": {
-          //                       "abilities": 4,
-          //                       "type_": "0x00000000000000000000000000000001::Token::Token<0x18351d311d32201149a4df2a9fc2db8a::XETH::XETH>",
-          //                       "value": [
-          //                           [
-          //                               "value",
-          //                               {
-          //                                   "U128": "1000555555555000000"
-          //                               }
-          //                           ]
-          //                       ]
-          //                   }
-          //               }
-          //           ]
-          //       ]
-          //   },
-          //   "id": 101
-          // }
           AvailableAmount: '1000555555555000000',
           TokenBasic: null,
           TokenMaps: null,
@@ -146,7 +109,7 @@ export default {
     console.log({ fromChainId, fromTokenHash });
     // https://bridge.poly.network/testnet/v1/tokenmap
     let result;
-    if (fromChainId === 318 && fromTokenHash === '00000000000000000000000000000001') {
+    if (fromChainId === 318 && fromTokenHash === '00000000000000000000000000000001::stc::stc') {
       result = {
         TotalCount: 1,
         TokenMaps: [
