@@ -20,8 +20,6 @@ jobs:
       - name: Login to GitHub Container Registry
         run: |
           echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          env:
-            GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
       - name: Build and tag image
         run: |
           docker build --build-arg VUE_APP_TITLE=PolyBridge -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.sha }}
