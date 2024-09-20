@@ -15,9 +15,11 @@ spec:
     spec:
       containers:
         - name: vue-app
-          image: ghcr.io/elements-studio/stc-poly-bridge-frontend:latest
+          image: ghcr.io/elements-studio/stc-poly-bridge-frontend:v0.1.2
           ports:
             - containerPort: 80
+      imagePullSecrets:
+        - name: ghcr-secret
 ---
 apiVersion: v1
 kind: Service
