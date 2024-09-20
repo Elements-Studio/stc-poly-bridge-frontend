@@ -29,28 +29,7 @@ jobs:
       - name: Push image
         run: |
           docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.sha }}
-#      - name: Build and push Docker image
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          file: ./Dockerfile
-#          push: true
-#          tags: |
-#            starcoin/stc-poly-bridge-frontend:latest
-#            starcoin/stc-poly-bridge-frontend:${{ github.sha }}
-#          build-args: |
-#            VUE_APP_TITLE=PolyBridge
-#
-#      - name: Image digest
-#        run: echo ${{ steps.docker_build.outputs.digest }}
-#
-#      - name: Verify push to DockerHub
-#        run: |
-#          echo "Image pushed to DockerHub successfully!"
-#          echo "Tags:"
-#          echo "  - starcoin/stc-poly-bridge-frontend:latest"
-#          echo "  - starcoin/stc-poly-bridge-frontend:${{ github.sha }}"
-
+          
       - name: Deployment notification
         if: success()
         run: |
